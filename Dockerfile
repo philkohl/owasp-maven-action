@@ -1,3 +1,5 @@
 FROM philkohl/owasp-maven-action:latest
 
-ENTRYPOINT ["mvn", "org.owasp:dependency-check-maven:check", "-DdataDirectory=/dependency-check/data","-DfailBuildOnCVSS=5","-DoutputDirectory=./"]
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/bin/sh","/entrypoint.sh"]
