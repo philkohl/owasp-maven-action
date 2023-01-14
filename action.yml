@@ -1,0 +1,5 @@
+name: 'OWASP Check with maven'
+description: 'Checks your JAVA project for vulnerabilities'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
