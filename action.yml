@@ -1,5 +1,28 @@
 name: 'OWASP Check with maven'
 description: 'Checks your JAVA project for vulnerabilities'
+inputs:
+  failBuildOnCVSS:
+    default: '5'
+    required: false
+    description: Score on which the build should fail
+  outputDirectory:
+    default: './'
+    required: false
+    description: Output directory to store report
+  format:
+    default: 'HTML'
+    required: false
+    description: Format of the report (HTML, XML, CSV, JSON, JUNIT, SARIF, ALL)
+  args:
+    required: false
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - '-DdataDirectory=/dependency-check/data'
+    - '-DfailBuildOnCVSS=${{ inputs.failBuildOnCVSS }}'
+    - '-Dodc.outputDirectory=/github/workspace/${{ inputs.outputDirectory }}'
+    - '-Dformat=${{ inputs.format }}'
+    - '-DautoUpdate=false'
+    - ${{ inputs.args }}
