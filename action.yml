@@ -13,8 +13,12 @@ inputs:
     default: 'HTML'
     required: false
     description: Format of the report (HTML, XML, CSV, JSON, JUNIT, SARIF, ALL)
+  suppressionFile:
+    required: false
+    description: Path/URL to suppression file to exclude false positives in report.
   args:
     required: false
+    description: Pass all other arguments to maven or the owasp maven plugin
 
 runs:
   using: 'docker'
@@ -25,4 +29,5 @@ runs:
     - '-Dodc.outputDirectory=/github/workspace/${{ inputs.outputDirectory }}'
     - '-Dformat=${{ inputs.format }}'
     - '-DautoUpdate=false'
+    - '-DsuppressionFiles=${{ inputs.suppressionFile }}'
     - ${{ inputs.args }}
