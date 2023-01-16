@@ -16,6 +16,10 @@ inputs:
   suppressionFile:
     required: false
     description: Path/URL to suppression file to exclude false positives in report.
+  goal:
+    required: false
+    description: 'Goal for the Maven dependency checker plugin: check (default) or aggregate'
+    default: 'check'
   args:
     required: false
     description: Pass all other arguments to maven or the owasp maven plugin
@@ -24,6 +28,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
+    - '${{ inputs.goal }}'
     - '-DdataDirectory=/dependency-check/data'
     - '-DfailBuildOnCVSS=${{ inputs.failBuildOnCVSS }}'
     - '-Dodc.outputDirectory=/github/workspace/${{ inputs.outputDirectory }}'
