@@ -16,10 +16,6 @@ inputs:
   suppressionFile:
     required: false
     description: Path/URL to suppression file to exclude false positives in report.
-  submodule:
-    required: false
-    description: Path to submodule in Maven Multi-Module Project.
-    default: './'
   args:
     required: false
     description: Pass all other arguments to maven or the owasp maven plugin
@@ -28,7 +24,6 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - '-DscanDirectory=${{ inputs.submodule }}'
     - '-DdataDirectory=/dependency-check/data'
     - '-DfailBuildOnCVSS=${{ inputs.failBuildOnCVSS }}'
     - '-Dodc.outputDirectory=/github/workspace/${{ inputs.outputDirectory }}'
