@@ -28,7 +28,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - '${{ inputs.submodule }}'
+    - '-DscanDirectory=${{ inputs.submodule }}'
     - '-DdataDirectory=/dependency-check/data'
     - '-DfailBuildOnCVSS=${{ inputs.failBuildOnCVSS }}'
     - '-Dodc.outputDirectory=/github/workspace/${{ inputs.outputDirectory }}'
