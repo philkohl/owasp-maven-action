@@ -2,7 +2,11 @@
 set -e
 all_args=$@
 
+echo /github/home/
 ls -l /github/home/
+
+echo .
+ls -l .
 
 mvn help:evaluate -Dexpression=settings.localRepository | grep -v '\[INFO\]'
 
